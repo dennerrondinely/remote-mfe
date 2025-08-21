@@ -1,5 +1,5 @@
 options:
-  logging: CLOUD_LOGGING_ONLY  # usa apenas Cloud Logging, evita erro de bucket de logs
+  logging: CLOUD_LOGGING_ONLY  # usa apenas Cloud Logging
 
 steps:
   # 1. Instalar dependências
@@ -8,18 +8,21 @@ steps:
 
   # 2. Rodar o build do projeto (gera pasta build/)
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'bundle:android']
+    args: ['run', 'build']
 
-  # 3. Subir arquivos para o bucket (substituindo os antigos)
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  # 3. Ler a versão do package.json
+  - name: 'gcr.io/cloud-builders/npm'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "Limpando arquivos antigos do bucket..."
-        gsutil -m rm -r gs://teste-415119.appspot.com/** || true
+        VERSION=$(node -p "require('./package.json').version")
+        echo "Versão detectada: $VERSION"
 
-        echo "Copiando novos arquivos..."
-        gsutil -m cp -r build/* gs://teste-415119.appspot.com
+        # Criar a pasta da versão no bucket
+        echo "Criando pasta no bucket: $VERSION"
+        gsutil -m cp -r build/outputs/* gs://teste-415119.appspot.com/$VERSION/
+
+        echo "Upload finalizado para gs://teste-415119.appspot.com/$VERSION/"
 
 timeout: '900s'

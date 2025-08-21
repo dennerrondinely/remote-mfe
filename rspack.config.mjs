@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as Repack from '@callstack/repack';
+import pkg from './package.json' with {type: "json"}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,10 +34,6 @@ export default env => {
     resolve: {
       ...Repack.getResolveOptions(),
     },
-    // output: {
-    //   filename: '[name].js',
-    //   chunkFilename: '[name].chunk.bundle',
-    // },
     module: {
       rules: [
         ...Repack.getJsTransformRules(),
@@ -72,6 +69,13 @@ export default env => {
         exposes: {
           './MiniApp': './src/screens/RemoteScreen',
         },
+        shared: {
+          "@react-native-vector-icons/material-icons": {
+            eager: true,
+            singleton: true,
+            requiredVersion: "12.3.0"
+          }
+        }
       }),
     ],
   };
