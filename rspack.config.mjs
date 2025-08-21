@@ -66,14 +66,7 @@ export default env => {
         filename: 'MiniApp.container.bundle',
         dts: false,
         exposes: {
-          './MiniApp': './src/screens/RemoteScreen',
-        },
-        shared: {
-          "@react-native-vector-icons/material-icons": {
-            eager: true,
-            singleton: true,
-            requiredVersion: "12.3.0"
-          }
+          './MiniApp': './src/screens/RemoteContainerScreen',
         }
       }),
     ],
