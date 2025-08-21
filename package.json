@@ -15,7 +15,6 @@
     "serve-remote-assets:android": "adb reverse tcp:9999 tcp:9999 && npm run http-server -p 9000 build/outputs/android/remotes"
   },
   "dependencies": {
-    "@react-native-vector-icons/material-icons": "^12.3.0",
     "@react-native/new-app-screen": "0.80.0",
     "react": "19.1.0",
     "react-native": "0.80.0",

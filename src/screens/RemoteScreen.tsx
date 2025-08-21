@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, FlatList } from 'react-native';
-import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../constants/colors';
 import TransactionItem, {
   TransactionItemProps,
@@ -129,73 +128,63 @@ export const transactions: TransactionItemProps[] = [
 ];
 
 export default function RemoteScreen() {
-  const safeAreaInsets = useSafeAreaInsets();
-  const styles = getStyles(safeAreaInsets);
   return (
-    <View style={styles.container}>
-      <View style={styles.screenContainer}>
-        <Text style={styles.primaryText}>Remote test 0.0.2</Text>
-        <FlatList
-          data={transactions}
-          renderItem={({ item }) => <TransactionItem {...item} />}
-          ListEmptyComponent={
-            <Text style={styles.secondaryText}>Ainda não há nenhum item!</Text>
-          }
-          style={styles.content}
-        />
-      </View>
+    <View style={styles.screenContainer}>
+      <Text style={styles.primaryText}>Remote test 0.0.2</Text>
+      <FlatList
+        data={transactions}
+        renderItem={({ item }) => <TransactionItem {...item} />}
+        ListEmptyComponent={
+          <Text style={styles.secondaryText}>Ainda não há nenhum item!</Text>
+        }
+        style={styles.content}
+      />
     </View>
   );
 }
 
-const getStyles = (safeAreaInsets: EdgeInsets) =>
-  StyleSheet.create({
-    container: {
-      paddingTop: safeAreaInsets.top,
-      backgroundColor: colors.primary,
-    },
-    screenContainer: {
-      flex: 1,
-      backgroundColor: colors.background,
-      gap: 12,
-      paddingVertical: 12,
-      paddingHorizontal: 20,
-    },
-    content: {
-    },
-    input: {
-      height: 40,
-      paddingHorizontal: 16,
-      borderColor: colors.secondaryText,
-      borderWidth: 1,
-      borderRadius: 8,
-      flexGrow: 1,
-    },
-    inputLabel: {
-      fontSize: 16,
-      color: colors.primaryText,
-      marginBottom: 4,
-    },
-    line: {
-      backgroundColor: colors.secondaryText,
-      height: 1,
-      opacity: 0.5,
-      marginBottom: 4,
-    },
-    primaryText: {
-      fontSize: 16,
-      color: colors.primaryText,
-    },
-    secondaryText: {
-      fontSize: 12,
-      color: colors.secondaryText,
-    },
-    positiveText: {
-      fontSize: 16,
-      color: colors.positiveText,
-    },
-    negativeText: {
-      fontSize: 16,
-      color: colors.negativesText,
-    },
-  });
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    backgroundColor: colors.background,
+    gap: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+  },
+  content: {},
+  input: {
+    height: 40,
+    paddingHorizontal: 16,
+    borderColor: colors.secondaryText,
+    borderWidth: 1,
+    borderRadius: 8,
+    flexGrow: 1,
+  },
+  inputLabel: {
+    fontSize: 16,
+    color: colors.primaryText,
+    marginBottom: 4,
+  },
+  line: {
+    backgroundColor: colors.secondaryText,
+    height: 1,
+    opacity: 0.5,
+    marginBottom: 4,
+  },
+  primaryText: {
+    fontSize: 16,
+    color: colors.primaryText,
+  },
+  secondaryText: {
+    fontSize: 12,
+    color: colors.secondaryText,
+  },
+  positiveText: {
+    fontSize: 16,
+    color: colors.positiveText,
+  },
+  negativeText: {
+    fontSize: 16,
+    color: colors.negativesText,
+  },
+});

@@ -1,7 +1,5 @@
 import { categories } from "../constants/categories"
-import { colors } from "../constants/colors"
-import { MaterialIcons, MaterialIconsIconName } from "@react-native-vector-icons/material-icons"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 
 interface CategoryItemProps {
   category: keyof typeof categories
@@ -10,11 +8,7 @@ interface CategoryItemProps {
 export default function CategoryItem({ category }: CategoryItemProps) {
   return (
     <View style={styles({ category }).background}>
-      <MaterialIcons
-        name={categories[category].icon as MaterialIconsIconName}
-        size={24}
-        color={colors.primaryContrast}
-      />
+      <Text>{category.charAt(0).toUpperCase()}</Text>
     </View>
   )
 }

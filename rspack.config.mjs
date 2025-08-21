@@ -33,6 +33,10 @@ export default env => {
     resolve: {
       ...Repack.getResolveOptions(),
     },
+    // output: {
+    //   filename: '[name].js',
+    //   chunkFilename: '[name].chunk.bundle',
+    // },
     module: {
       rules: [
         ...Repack.getJsTransformRules(),
@@ -66,8 +70,8 @@ export default env => {
         filename: 'MiniApp.container.bundle',
         dts: false,
         exposes: {
-          './MiniApp': './src/screens/RemoteContainerScreen',
-        }
+          './MiniApp': './src/screens/RemoteScreen',
+        },
       }),
     ],
   };
