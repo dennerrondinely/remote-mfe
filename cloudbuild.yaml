@@ -16,7 +16,7 @@ steps:
       - '-c'
       - |
         # Pegar versão do package.json
-        _VERSION=$(node -p "require('./package.json').version")
+        _VERSION=$(jq -r .version package.json)
         echo "Versão detectada: $_VERSION"
 
         # Criar pasta da versão no bucket e subir os arquivos
