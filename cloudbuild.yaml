@@ -1,5 +1,7 @@
 options:
   logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _VERSION: '0.0.0'
 
 steps:
   - name: 'gcr.io/cloud-builders/npm'
@@ -14,7 +16,7 @@ steps:
       - '-c'
       - |
         # Pegar versão do package.json
-        VERSION=$(node -p "require('./package.json').version")
+        _VERSION=$(node -p "require('./package.json').version")
         echo "Versão detectada: $VERSION"
 
         # Criar pasta da versão no bucket e subir os arquivos
