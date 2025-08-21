@@ -1,0 +1,20 @@
+steps:
+  # 1. Instalar dependências
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+
+  # 2. Rodar o build do projeto
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+
+  # 3. Subir arquivos para o bucket (substituindo os antigos)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "Limpando arquivos antigos do bucket..."
+        gsutil -m rm -r gs://teste-415119.appspot.com/** || true
+
+        echo "Copiando novos arquivos..."
+        gsutil -m cp -r build/* gs://teste-415119.appspot.com
