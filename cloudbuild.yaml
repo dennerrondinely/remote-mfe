@@ -1,7 +1,5 @@
 options:
   logging: CLOUD_LOGGING_ONLY
-substitutions:
-  _VERSION: '0.0.0'
 
 steps:
   - name: 'gcr.io/cloud-builders/npm'
@@ -16,11 +14,11 @@ steps:
       - '-c'
       - |
         # Pegar versão do package.json
-        _VERSION=$(\
+        VERSION=$(\
         cat package.json \
         | grep --only-matching '"version": "[^"]*' \
         | cut --delimiter='"' --fields=4)
-        echo "Versão detectada: $_VERSION"
+        echo "Versão detectada: $${VERSION}"
 
         # Criar pasta da versão no bucket e subir os arquivos
-        gsutil -m cp -r build/* gs://teste-415119.appspot.com/$_VERSION/
+        gsutil -m cp -r build/* gs://teste-415119.appspot.com/$${VERSION}/
