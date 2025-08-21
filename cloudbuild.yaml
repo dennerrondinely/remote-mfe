@@ -6,23 +6,24 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
 
-  # 2. Rodar o build do projeto (gera pasta build/)
+  # 2. Rodar o build do projeto
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
 
-  # 3. Ler a versão do package.json
-  - name: 'gcr.io/cloud-builders/npm'
+  # 3. Ler versão e enviar para GCS dentro de pasta versionada
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
+        # Lê a versão do package.json
         VERSION=$(node -p "require('./package.json').version")
         echo "Versão detectada: $VERSION"
 
-        # Criar a pasta da versão no bucket
-        echo "Criando pasta no bucket: $VERSION"
+        # Cria pasta com a versão e envia arquivos
+        echo "Upload para pasta $VERSION no bucket..."
         gsutil -m cp -r build/outputs/* gs://teste-415119.appspot.com/$VERSION/
 
-        echo "Upload finalizado para gs://teste-415119.appspot.com/$VERSION/"
+        echo "Upload finalizado: gs://teste-415119.appspot.com/$VERSION/"
 
 timeout: '900s'
