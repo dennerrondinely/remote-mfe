@@ -8,7 +8,7 @@ steps:
 
   # 2. Rodar o build do projeto (gera pasta build/)
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'build']
+    args: ['run', 'bundle:android']
 
   # 3. Subir arquivos para o bucket (substituindo os antigos)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
