@@ -1,29 +1,21 @@
 options:
-  logging: CLOUD_LOGGING_ONLY  # usa apenas Cloud Logging
+  logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # 1. Instalar dependências
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
 
-  # 2. Rodar o build do projeto
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
 
-  # 3. Ler versão e enviar para GCS dentro de pasta versionada
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Lê a versão do package.json
+        # Pegar versão do package.json
         VERSION=$(node -p "require('./package.json').version")
         echo "Versão detectada: $VERSION"
 
-        # Cria pasta com a versão e envia arquivos
-        echo "Upload para pasta $VERSION no bucket..."
-        gsutil -m cp -r build/outputs/* gs://teste-415119.appspot.com/$VERSION/
-
-        echo "Upload finalizado: gs://teste-415119.appspot.com/$VERSION/"
-
-timeout: '900s'
+        # Criar pasta da versão no bucket e subir os arquivos
+        gsutil -m cp -r build/* gs://teste-415119.appspot.com/$VERSION/
