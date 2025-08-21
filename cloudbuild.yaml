@@ -17,7 +17,7 @@ steps:
       - |
         # Pegar versão do package.json
         _VERSION=$(node -p "require('./package.json').version")
-        echo "Versão detectada: $VERSION"
+        echo "Versão detectada: $_VERSION"
 
         # Criar pasta da versão no bucket e subir os arquivos
-        gsutil -m cp -r build/* gs://teste-415119.appspot.com/$VERSION/
+        gsutil -m cp -r build/* gs://teste-415119.appspot.com/$_VERSION/
