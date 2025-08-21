@@ -1,9 +1,12 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # usa apenas Cloud Logging, evita erro de bucket de logs
+
 steps:
   # 1. Instalar dependências
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
 
-  # 2. Rodar o build do projeto
+  # 2. Rodar o build do projeto (gera pasta build/)
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
 
@@ -18,3 +21,5 @@ steps:
 
         echo "Copiando novos arquivos..."
         gsutil -m cp -r build/* gs://teste-415119.appspot.com
+
+timeout: '900s'
