@@ -16,7 +16,10 @@ steps:
       - '-c'
       - |
         # Pegar versão do package.json
-        _VERSION=$(jq -r .version package.json)
+        _VERSION=$(\
+        cat package.json \
+        | grep --only-matching '"version": "[^"]*' \
+        | cut --delimiter='"' --fields=4)
         echo "Versão detectada: $_VERSION"
 
         # Criar pasta da versão no bucket e subir os arquivos
