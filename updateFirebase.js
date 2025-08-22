@@ -1,8 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import admin from 'firebase-admin';
-import dotenv from 'dotenv';
-dotenv.config();
+const fs = require('fs');
+const path = require('path');
+const admin = require('firebase-admin');
+require('dotenv').config();
 
 // 🔹 Variáveis de ambiente
 const {
