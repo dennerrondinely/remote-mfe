@@ -7,7 +7,7 @@ require('dotenv').config();
 const {
   MODULE_NAME,
   BUCKET_URL,
-  FIREBASE_SERVICE_ACCOUNT_KEY,
+  FIREBASE_SERVICE_ACCOUNT_JSON,
   MODULE_ID,
   COLLECTION_NAME
 } = process.env;
@@ -18,7 +18,7 @@ const packageData = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 const version = packageData.version;
 
 // 🔹 Inicializar Firebase Admin
-const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_KEY);
+const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_JSON);
 
 // Corrigir quebras de linha no private_key
 serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
