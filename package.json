@@ -12,10 +12,13 @@
     "build": "npm run bundle:ios && npm run bundle:android",
     "bundle:ios": "react-native bundle --platform ios --entry-file index.js --dev false",
     "bundle:android": "react-native bundle --platform android --entry-file index.js --dev false",
-    "serve-remote-assets:android": "adb reverse tcp:9999 tcp:9999 && npm run http-server -p 9000 build/outputs/android/remotes"
+    "serve-remote-assets:android": "adb reverse tcp:9999 tcp:9999 && npm run http-server -p 9000 build/outputs/android/remotes",
+    "update:firebase": "node -r dotenv/config updateFirebase.js"
   },
   "dependencies": {
     "@react-native/new-app-screen": "0.80.0",
+    "dotenv": "^17.2.1",
+    "firebase-admin": "^13.4.0",
     "react": "19.1.0",
     "react-native": "0.80.0",
     "react-native-safe-area-context": "^5.5.2"

@@ -30,3 +30,5 @@ steps:
       - 'ch'
       - 'allUsers:objectViewer'
       - 'gs://teste-415119.appspot.com'
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'update:firebase']
