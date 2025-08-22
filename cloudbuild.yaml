@@ -31,18 +31,17 @@ steps:
       - 'allUsers:objectViewer'
       - 'gs://teste-415119.appspot.com'
   - name: 'gcr.io/cloud-builders/npm'
-    secretEnv:
-      - FIREBASE_SERVICE_ACCOUNT_KEY
-      - MODULE_NAME
-      - BUCKET_URL
-      - MODULE_ID
-      - COLLECTION_NAME
+    secretEnv: ['FIREBASE_SERVICE_ACCOUNT_KEY', 'MODULE_NAME', 'BUCKET_URL', 'MODULE_ID', 'COLLECTION_NAME']
     args: ['run', 'update:firebase']
-secrets:
-  - kmsKeyName: projects/PROJECT_ID/locations/global/keyRings/KEYRING/cryptoKeys/KEY
-    secretEnv:
-      FIREBASE_SERVICE_ACCOUNT_KEY: projects/PROJECT_ID/secrets/FIREBASE_SERVICE_ACCOUNT_KEY/versions/latest
-      MODULE_NAME: projects/PROJECT_ID/secrets/MODULE_NAME/versions/latest
-      BUCKET_URL: projects/PROJECT_ID/secrets/BUCKET_URL/versions/latest
-      MODULE_ID: projects/PROJECT_ID/secrets/MODULE_ID/versions/latest
-      COLLECTION_NAME: projects/PROJECT_ID/secrets/COLLECTION_NAME/versions/latest
+availableSecrets:
+  secretManager:
+  - versionName: projects/PROJECT_ID/secrets/FIREBASE_SERVICE_ACCOUNT_KEY/versions/latest
+    env: 'FIREBASE_SERVICE_ACCOUNT_KEY'
+  - versionName: projects/PROJECT_ID/secrets/MODULE_NAME/versions/latest
+    env: 'MODULE_NAME'
+  - versionName: projects/PROJECT_ID/secrets/BUCKET_URL/versions/latest
+    env: 'BUCKET_URL'
+  - versionName: projects/PROJECT_ID/secrets/MODULE_ID/versions/latest
+    env: 'MODULE_ID'
+  - versionName: projects/PROJECT_ID/secrets/COLLECTION_NAME/versions/latest
+    env: 'COLLECTION_NAME'
