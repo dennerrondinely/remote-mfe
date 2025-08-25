@@ -130,7 +130,7 @@ export const transactions: TransactionItemProps[] = [
 export default function RemoteScreen() {
   return (
     <View style={styles.screenContainer}>
-      <Text style={styles.primaryText}>Remote test 0.0.2</Text>
+      <Text style={styles.primaryText}>0.0.1</Text>
       <FlatList
         data={transactions}
         renderItem={({ item }) => <TransactionItem {...item} />}
