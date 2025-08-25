@@ -146,7 +146,7 @@ export default function RemoteScreen() {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: colors.background,
     gap: 12,
     paddingVertical: 12,
     paddingHorizontal: 20,
