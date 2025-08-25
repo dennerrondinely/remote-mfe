@@ -1,8 +1,10 @@
 export const colors = {
   primary: "#37BF81",
   primaryContrast: "#FFFFFF",
+  secondary: "#AB8FBE",
   inactive: "#B1B1B1",
   background: "#F5F5F5",
+  backgroundSecondary: "#B1B1B1",
   categoryIncome: "#DE9AC3",
   categoryFood: "#DEA17B",
   categoryHouse: "#E6E088",

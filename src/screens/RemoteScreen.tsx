@@ -130,7 +130,7 @@ export const transactions: TransactionItemProps[] = [
 export default function RemoteScreen() {
   return (
     <View style={styles.screenContainer}>
-      <Text style={styles.primaryText}>0.0.1</Text>
+      <Text style={styles.primaryText}>0.0.2</Text>
       <FlatList
         data={transactions}
         renderItem={({ item }) => <TransactionItem {...item} />}
@@ -146,7 +146,7 @@ export default function RemoteScreen() {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundSecondary,
     gap: 12,
     paddingVertical: 12,
     paddingHorizontal: 20,
