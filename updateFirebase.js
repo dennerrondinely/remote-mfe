@@ -5,10 +5,9 @@ require('dotenv').config();
 
 // 🔹 Variáveis de ambiente
 const {
-  MODULE_NAME,
   BUCKET_URL,
   FIREBASE_SERVICE_ACCOUNT_JSON,
-  MODULE_ID,
+  TRANSACTION_MODULE_ID,
   COLLECTION_NAME
 } = process.env;
 
@@ -33,8 +32,8 @@ async function createModule() {
   try {
     // Criar um novo documento com ID automático
     const docRef = await db.collection(COLLECTION_NAME).add({
-      scriptId: MODULE_NAME,
-      moduleId: MODULE_ID,
+      scriptId: "Transaction",
+      moduleId: TRANSACTION_MODULE_ID,
       version: version,
       url: BUCKET_URL,
       active: false
