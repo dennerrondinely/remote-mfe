@@ -1,6 +1,9 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as Repack from '@callstack/repack';
+import fs from 'fs';
+const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -72,6 +75,14 @@ export default env => {
         exposes: {
           './MiniApp': './src/screens/RemoteScreen',
         },
+        shared: Object.fromEntries(
+          Object.entries(pkg.dependencies).map(([dep, { version }]) => {
+            return [
+              dep,
+              { singleton: true, eager: true, requiredVersion: version },
+            ];
+          }),
+        ),
       }),
     ],
   };

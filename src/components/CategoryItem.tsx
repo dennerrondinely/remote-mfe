@@ -1,31 +1,37 @@
-import { categories } from "../constants/categories"
-import { StyleSheet, Text, View } from "react-native"
+import MaterialIcons, { MaterialIconsIconName } from '@react-native-vector-icons/material-icons';
+import { categories } from '../constants/categories';
+import { StyleSheet, View } from 'react-native';
+import { colors } from '../constants/colors';
 
 interface CategoryItemProps {
-  category: keyof typeof categories
+  category: keyof typeof categories;
 }
 
 export default function CategoryItem({ category }: CategoryItemProps) {
   return (
     <View style={styles({ category }).background}>
-      <Text>{category.charAt(0).toUpperCase()}</Text>
+      <MaterialIcons
+        name={categories[category].icon as MaterialIconsIconName}
+        size={24}
+        color={colors.primaryContrast}
+      />
     </View>
-  )
+  );
 }
 
 interface CategoryItemStyles {
-  category: keyof typeof categories
+  category: keyof typeof categories;
 }
 
 const styles = ({ category }: CategoryItemStyles) =>
   StyleSheet.create({
     background: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       width: 44,
       height: 44,
       borderRadius: 22,
-      backgroundColor: categories[category].background
-    }
-  })
+      backgroundColor: categories[category].background,
+    },
+  });
